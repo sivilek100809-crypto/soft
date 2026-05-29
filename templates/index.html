@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeautyStart | Главная</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-pink-50 text-gray-800">
+
+    <div class="max-w-4xl mx-auto p-4">
+        <h1 class="text-3xl font-bold text-center text-pink-600 my-6">✨ BeautyStart Москва</h1>
+        
+        <form method="GET" action="/client" class="bg-white p-4 rounded-xl shadow-md mb-6 flex gap-2 relative">
+            <div class="w-full relative">
+                <input type="text" name="metro" id="metro-input" value="{{ selected_metro }}" placeholder="Начните вводить метро, МЦК или МЦД..." 
+                       class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-pink-400" autocomplete="off">
+                
+                <div id="custom-dropdown" class="hidden absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto z-50">
+                    {% for station in metro_list %}
+                    <div class="dropdown-item px-4 py-2 hover:bg-pink-50 cursor-pointer text-gray-700 font-medium border-b border-gray-50 last:border-none flex items-center gap-2">
+                        <span>Ⓜ️</span> {{ station }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <button type="submit" class="bg-pink-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-pink-700 h-10">Искать</button>
+            {% if selected_metro %}
+                <a href="/client" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg flex items-center h-10">Сбросить</a>
+            {% endif %}
+        </form>
+
+        <h2 class="text-xl font-bold mb-4 text-gray-700">Салоны красоты:</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {% for salon in salons %}
+            <div class="bg-white rounded-xl overflow-hidden shadow-md border border-gray-100">
+                <img src="{{ salon.img }}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <span class="bg-pink-100 text-pink-700 text-xs px-2 py-1 rounded-full font-bold">Ⓜ️ {{ salon.metro }}</span>
+                    <h3 class="text-lg font-bold mt-2">{{ salon.name }}</h3>
+                    <p class="text-gray-500 text-sm mt-1">{{ salon.desc }}</p>
+                  <a href="/master/{{ salon.id if salon.id in [1, 2, 3] else 3 }}" class="block text-center bg-pink-500 text-white mt-4 py-2 rounded-lg font-medium hover:bg-pink-600">Посмотреть мастеров</a>  
+                </div>
+            </div>
+            {% else %}
+            <p class="text-gray-500">К сожалению, в этом районе салонов пока нет 😔</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        const input = document.getElementById('metro-input');
+        const dropdown = document.getElementById('custom-dropdown');
+        const items = document.querySelectorAll('.dropdown-item');
+
+        // Показываем подсказки при клике или вводе текста
+        function filterStations() {
+            const filter = input.value.toLowerCase().trim();
+            let hasMatches = false;
+
+            items.forEach(item => {
+                const text = item.textContent.replace('Ⓜ️', '').toLowerCase().trim();
+                if (text.includes(filter)) {
+                    item.style.display = 'flex';
+                    hasMatches = true;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            if (hasMatches) {
+                dropdown.classList.remove('hidden');
+            } else {
+                dropdown.classList.add('hidden');
+            }
+        }
+
+        input.addEventListener('focus', filterStations);
+        input.addEventListener('input', filterStations);
+
+        // Клик по станции из списка
+        items.forEach(item => {
+            item.addEventListener('mousedown', () => {
+                input.value = item.textContent.replace('Ⓜ️', '').trim();
+                dropdown.classList.add('hidden');
+            });
+        });
+
+        // Прячем список, если кликнули мимо поля
+        document.addEventListener('click', (e) => {
+            if (e.target !== input && e.target !== dropdown) {
+                dropdown.classList.add('hidden');
+            }
+        });
+    </script>
+
+</body>
+</html>

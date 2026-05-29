@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход для мастеров</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 flex items-center justify-center min-h-screen p-4">
+
+    <div class="max-w-md w-full bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
+        <div class="mb-6 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-pink-400">Выберите свой профиль:</h1>
+            <a href="/" class="text-xs text-slate-400 hover:text-white">← Назад</a>
+        </div>
+
+        <div class="space-y-3">
+            {% for master in masters %}
+            <a href="/master/{{ master.id }}/login" class="flex items-center gap-4 bg-slate-700 hover:bg-slate-600 border border-slate-600 p-3 rounded-xl transition">
+                <img src="{{ master.avatar }}" class="w-12 h-12 rounded-full object-cover border border-slate-500">
+                <div class="text-left">
+                    <h2 class="font-bold text-sm text-white">{{ master.name }}</h2>
+                    <p class="text-xs text-slate-400">{{ master.role }}</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>

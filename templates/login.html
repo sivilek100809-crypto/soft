@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход для мастеров</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 flex items-center justify-center min-h-screen p-4">
+
+    <div class="max-w-sm w-full bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
+        <div class="text-center mb-6">
+            <img src="{{ master.avatar }}" class="w-20 h-20 rounded-full object-cover mx-auto border-2 border-pink-400">
+            <h1 class="text-xl font-bold mt-3">Личный кабинет</h1>
+            <p class="text-xs text-slate-400 mt-1">{{ master.name }}</p>
+        </div>
+
+        {% if error %}
+        <div class="bg-rose-500/20 text-rose-400 text-xs p-3 rounded-xl border border-rose-500/30 mb-4 text-center font-medium">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="POST" class="space-y-4">
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Введите ваш пароль:</label>
+                <input type="password" name="password" placeholder="••••••••" required autofocus
+                       class="w-full bg-slate-700 border border-slate-600 text-white rounded-xl p-3 focus:outline-pink-400 text-center text-lg tracking-widest">
+            </div>
+
+            <button type="submit" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 rounded-xl transition text-sm">
+                Войти в панель управления
+            </button>
+        </form>
+
+        <a href="/master/{{ master.id }}" class="block text-center text-xs text-slate-500 mt-4 hover:text-slate-400">← Вернуться на сайт</a>
+    </div>
+
+</body>
+</html>
