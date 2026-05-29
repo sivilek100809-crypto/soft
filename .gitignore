@@ -10,8 +10,15 @@ env/
 instance/
 *.log
 
+# Секреты и данные приложения
+config.py
+data.json
+
 # OS / IDE
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
+
+# Локальные служебные файлы инструментов
+.claude/

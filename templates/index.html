@@ -3,48 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeautyStart | Главная</title>
+    <title>YS.BEAUTY.LAB | Главная</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
-<body class="bg-pink-50 text-gray-800">
+<body class="bg-lux text-gray-800 min-h-screen">
 
     <div class="max-w-4xl mx-auto p-4">
-        <h1 class="text-3xl font-bold text-center text-pink-600 my-6">✨ BeautyStart Москва</h1>
-        
-        <form method="GET" action="/client" class="bg-white p-4 rounded-xl shadow-md mb-6 flex gap-2 relative">
+        <div class="text-center my-8">
+            <a href="/" class="chip-lux inline-block text-[11px] font-semibold tracking-[0.25em] px-4 py-1.5 rounded-full mb-3">✦ YS.BEAUTY.LAB ✦</a>
+            <h1 class="font-display title-lux text-4xl font-bold">Салоны красоты Москвы</h1>
+            {% if session.client %}
+            <p class="text-xs text-gray-500 mt-3">Вы записываетесь как
+                <span class="font-semibold text-gray-700">{{ session.client.name }} {{ session.client.surname }}</span>
+                · <a href="/client/register" class="text-violet-600 hover:underline">изменить</a></p>
+            {% endif %}
+        </div>
+
+        <form method="GET" action="/client" class="glass p-4 rounded-3xl mb-8 flex gap-2 relative">
             <div class="w-full relative">
-                <input type="text" name="metro" id="metro-input" value="{{ selected_metro }}" placeholder="Начните вводить метро, МЦК или МЦД..." 
-                       class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-pink-400" autocomplete="off">
-                
-                <div id="custom-dropdown" class="hidden absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto z-50">
+                <input type="text" name="metro" id="metro-input" value="{{ selected_metro }}" placeholder="Начните вводить метро, МЦК или МЦД..."
+                       class="input-lux w-full" autocomplete="off">
+
+                <div id="custom-dropdown" class="hidden absolute left-0 right-0 top-full mt-2 menu-glass rounded-2xl max-h-60 overflow-y-auto z-50">
                     {% for station in metro_list %}
-                    <div class="dropdown-item px-4 py-2 hover:bg-pink-50 cursor-pointer text-gray-700 font-medium border-b border-gray-50 last:border-none flex items-center gap-2">
-                        <span>Ⓜ️</span> {{ station }}
+                    <div class="dropdown-item px-4 py-2 hover:bg-white/70 cursor-pointer text-gray-700 font-medium border-b border-white/40 last:border-none flex items-center gap-2">
+                        <span class="text-violet-500">Ⓜ️</span> {{ station }}
                     </div>
                     {% endfor %}
                 </div>
             </div>
 
-            <button type="submit" class="bg-pink-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-pink-700 h-10">Искать</button>
+            <button type="submit" class="btn-lux px-6 rounded-2xl font-semibold whitespace-nowrap">Искать</button>
             {% if selected_metro %}
-                <a href="/client" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg flex items-center h-10">Сбросить</a>
+                <a href="/client" class="btn-ink px-4 rounded-2xl flex items-center text-sm font-medium">Сбросить</a>
             {% endif %}
         </form>
 
-        <h2 class="text-xl font-bold mb-4 text-gray-700">Салоны красоты:</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <h2 class="font-display text-2xl font-bold mb-5 text-gray-800">Салоны красоты</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             {% for salon in salons %}
-            <div class="bg-white rounded-xl overflow-hidden shadow-md border border-gray-100">
-                <img src="{{ salon.img }}" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <span class="bg-pink-100 text-pink-700 text-xs px-2 py-1 rounded-full font-bold">Ⓜ️ {{ salon.metro }}</span>
-                    <h3 class="text-lg font-bold mt-2">{{ salon.name }}</h3>
+            <div class="glass hover-rise rounded-3xl overflow-hidden">
+                <div class="relative">
+                    <img src="{{ salon.img }}" class="w-full h-48 object-cover">
+                    <span class="absolute top-3 left-3 chip-lux backdrop-blur text-xs px-3 py-1 rounded-full font-bold shadow-sm">Ⓜ️ {{ salon.metro }}</span>
+                </div>
+                <div class="p-5">
+                    <h3 class="font-display text-xl font-bold text-gray-900">{{ salon.name }}</h3>
                     <p class="text-gray-500 text-sm mt-1">{{ salon.desc }}</p>
-                  <a href="/master/{{ salon.id if salon.id in [1, 2, 3] else 3 }}" class="block text-center bg-pink-500 text-white mt-4 py-2 rounded-lg font-medium hover:bg-pink-600">Посмотреть мастеров</a>  
+                    <a href="/master/{{ salon.id }}" class="btn-lux block text-center mt-4 py-2.5 rounded-2xl font-semibold">Посмотреть мастеров</a>
                 </div>
             </div>
             {% else %}
-            <p class="text-gray-500">К сожалению, в этом районе салонов пока нет 😔</p>
+            <div class="glass rounded-3xl p-8 text-center md:col-span-2">
+                <p class="text-4xl mb-2">😔</p>
+                <p class="text-gray-500">К сожалению, в этом районе салонов пока нет</p>
+            </div>
             {% endfor %}
         </div>
     </div>

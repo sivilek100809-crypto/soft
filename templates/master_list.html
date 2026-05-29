@@ -5,23 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вход для мастеров</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
-<body class="bg-slate-900 text-slate-100 flex items-center justify-center min-h-screen p-4">
+<body class="bg-lux-dark text-slate-100 flex items-center justify-center min-h-screen p-4">
 
-    <div class="max-w-md w-full bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
+    <div class="max-w-md w-full glass-dark p-6 rounded-3xl">
         <div class="mb-6 flex justify-between items-center">
-            <h1 class="text-xl font-bold text-pink-400">Выберите свой профиль:</h1>
-            <a href="/" class="text-xs text-slate-400 hover:text-white">← Назад</a>
+            <h1 class="font-display text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-violet-300">Выберите профиль</h1>
+            <a href="/" class="text-xs text-violet-200/60 hover:text-white">← Назад</a>
         </div>
 
         <div class="space-y-3">
             {% for master in masters %}
-            <a href="/master/{{ master.id }}/login" class="flex items-center gap-4 bg-slate-700 hover:bg-slate-600 border border-slate-600 p-3 rounded-xl transition">
-                <img src="{{ master.avatar }}" class="w-12 h-12 rounded-full object-cover border border-slate-500">
-                <div class="text-left">
-                    <h2 class="font-bold text-sm text-white">{{ master.name }}</h2>
-                    <p class="text-xs text-slate-400">{{ master.role }}</p>
+            <a href="/master/{{ master.id }}/login" class="flex items-center gap-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-violet-300/30 p-3 rounded-2xl transition group">
+                <div class="ring-lux w-12 h-12 shrink-0">
+                    <img src="{{ master.avatar }}" class="w-full h-full object-cover">
                 </div>
+                <div class="text-left flex-1">
+                    <h2 class="font-bold text-sm text-white">{{ master.name }}</h2>
+                    <p class="text-xs text-violet-200/60">{{ master.role }}</p>
+                </div>
+                <span class="text-violet-300 group-hover:translate-x-1 transition">→</span>
             </a>
             {% endfor %}
         </div>

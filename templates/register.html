@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация клиента | YS.BEAUTY.LAB</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="bg-lux text-gray-800 min-h-screen flex items-center justify-center p-4">
+
+    <div class="max-w-md w-full">
+        <a href="/" class="text-violet-600 font-semibold hover:text-violet-700 inline-block mb-4">← Назад</a>
+
+        <div class="glass rounded-3xl p-7">
+            <h1 class="font-display text-3xl font-bold mb-1">Знакомимся 👋</h1>
+            <p class="text-gray-500 text-sm mb-5">Введите данные один раз — дальше запись будет в один клик, а мастер получит ваши контакты.</p>
+
+            {% if error %}
+            <div class="bg-rose-500/15 text-rose-600 text-sm p-3 rounded-xl border border-rose-500/30 mb-4 text-center font-medium">
+                {{ error }}
+            </div>
+            {% endif %}
+
+            <form method="POST" action="/client/register" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1">Фамилия</label>
+                    <input type="text" name="surname" required autofocus placeholder="Иванова"
+                           value="{{ client.surname if client else '' }}" class="input-lux w-full">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1">Имя</label>
+                    <input type="text" name="name" required placeholder="Мария"
+                           value="{{ client.name if client else '' }}" class="input-lux w-full">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1">Телефон</label>
+                    <input type="tel" name="phone" required placeholder="+7 999 123-45-67"
+                           value="{{ client.phone if client else '' }}" class="input-lux w-full">
+                </div>
+
+                <button type="submit" class="btn-lux w-full font-bold py-3 rounded-2xl mt-2">Продолжить к выбору салона</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -3,38 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Добро пожаловать в BeautyStart</title>
+    <title>Добро пожаловать в YS.BEAUTY.LAB</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
-<body class="bg-pink-50 text-gray-800 flex items-center justify-center min-h-screen p-4">
+<body class="bg-lux text-gray-800 flex items-center justify-center min-h-screen p-4">
 
     <div class="max-w-md w-full text-center">
-        <h1 class="text-4xl font-extrabold text-gray-900 mb-2 flex items-center justify-center gap-2">
-            ✨ BeautyStart
-        </h1>
-        <p class="text-sm text-gray-500 mb-8">Платформа поиска мастеров и записи на бьюти-процедуры</p>
+        <p class="chip-lux inline-block text-xs font-semibold tracking-[0.25em] px-4 py-1.5 rounded-full mb-5">✦ BEAUTY ATELIER ✦</p>
+        <h1 class="font-display title-lux text-5xl font-bold mb-3">YS.BEAUTY.LAB</h1>
+        <p class="text-sm text-gray-500 mb-10">Изысканная платформа поиска мастеров и записи на бьюти-процедуры</p>
 
         <div class="space-y-4">
-            <a href="/client" class="block bg-white border border-pink-200 p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-pink-400 transition text-left group">
+            <a href="/client" class="glass hover-rise block p-6 rounded-3xl text-left group">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h2 class="text-lg font-bold text-gray-800 group-hover:text-pink-600 transition">🙋‍♀️ Я клиент</h2>
-                        <p class="text-xs text-gray-400 mt-1">Хочу найти салон, выбрать мастера и записаться на услугу</p>
+                        <h2 class="font-display text-xl font-bold text-gray-900 group-hover:text-pink-600 transition">🙋‍♀️ Я клиент</h2>
+                        <p class="text-xs text-gray-500 mt-1">Найти салон, выбрать мастера и записаться на услугу</p>
                     </div>
-                    <span class="text-xl text-pink-500 group-hover:translate-x-1 transition">→</span>
+                    <span class="text-2xl text-pink-500 group-hover:translate-x-1 transition">→</span>
                 </div>
             </a>
 
-            <a href="/master/list" class="block bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-sm hover:shadow-md transition text-left group text-white">
+            <a href="/master/list" class="glass-dark hover-rise block p-6 rounded-3xl text-left group text-white">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h2 class="text-lg font-bold text-pink-400">👑 Я мастер</h2>
-                        <p class="text-xs text-slate-400 mt-1">Хочу войти в личный кабинет, настроить прайс и расписание</p>
+                        <h2 class="font-display text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-violet-300">👑 Я мастер</h2>
+                        <p class="text-xs text-violet-200/70 mt-1">Войти в личный кабинет, настроить прайс и расписание</p>
                     </div>
-                    <span class="text-xl text-pink-400 group-hover:translate-x-1 transition">→</span>
+                    <span class="text-2xl text-violet-300 group-hover:translate-x-1 transition">→</span>
                 </div>
             </a>
         </div>
+
+        <p class="text-[11px] text-gray-400 mt-10 tracking-wide">Москва · сеть бьюти-мастеров</p>
     </div>
 
 </body>
